@@ -1,22 +1,37 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import { ViewTransitions } from 'astro:transitions';
+import '../styles/globals.css';
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Full Stack Developer Mission Control Interface" } = Astro.props;
+---
+
+<!doctype html>
+<html lang={Astro.currentLocale} class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <ViewTransitions />
+
+    <!-- Additional SEO meta tags -->
+    <meta name="author" content="Ivan González" />
+    <meta name="keywords" content="Full Stack Developer, React, Vue, Node.js, JavaScript, TypeScript" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:image" content="/og-image.jpg" /> <!-- Make sure to add an og-image.jpg in your public folder -->
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body class="antialiased">
+    <slot />
+  </body>
+</html>

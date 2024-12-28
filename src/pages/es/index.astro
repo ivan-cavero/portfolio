@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { CommanderProfile } from '../../components/commander-profile';
+import { TechnicalSpecs } from '../../components/technical-specs';
+import { MissionLog } from '../../components/mission-log';
+import { CommunicationChannels } from '../../components/communication-channels';
+import { ProjectsShowcase } from '../../components/projects-showcase';
+import { LanguageSelector } from '../../components/language-selector';
+import { DataVisualizer } from '../../components/data-visualizer';
+
+const locale = 'es';
+---
+
+<Layout title="Ivan González - Control de misión" description="Desarrollador Full Stack especializado en React, Vue y Node.js. Explore mis proyectos y ponte en contacto!"></Layout>
+  <main class="min-h-screen w-full bg-[#000813]">
+    <div class="mission-container">
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 col-span-full">
+        <CommanderProfile client:load locale={locale} />
+        <CommunicationChannels client:load locale={locale} />
+      </div>
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 col-span-full">
+        <TechnicalSpecs client:load locale={locale} />
+        <DataVisualizer client:load locale={locale} />
+      </div>
+      <ProjectsShowcase client:load locale={locale} />
+      <MissionLog client:load locale={locale} />
+    </div>
+    <LanguageSelector client:load />
+  </main>
+</Layout>

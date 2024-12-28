@@ -1,11 +1,32 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import { CommanderProfile } from '../components/commander-profile';
+import { TechnicalSpecs } from '../components/technical-specs';
+import { MissionLog } from '../components/mission-log';
+import { CommunicationChannels } from '../components/communication-channels';
+import { ProjectsShowcase } from '../components/projects-showcase';
+import { LanguageSelector } from '../components/language-selector';
+import { DataVisualizer } from '../components/data-visualizer';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const locale = 'en';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Ivan González - Mission Control" description="Full Stack Developer specializing in React, Vue, and Node.js. Explore my projects and get in touch!">
+  <main class="min-h-screen w-full bg-[#000813]">
+    <div class="mission-container">
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 col-span-full">
+        <CommanderProfile client:load locale={locale} />
+        <CommunicationChannels client:load locale={locale} />
+      </div>
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 col-span-full">
+        <TechnicalSpecs client:load locale={locale} />
+        <DataVisualizer client:load locale={locale} />
+      </div>
+      <ProjectsShowcase client:load locale={locale} />
+      <MissionLog client:load locale={locale} />
+    </div>
+    <LanguageSelector client:load />
+  </main>
 </Layout>
+
+
