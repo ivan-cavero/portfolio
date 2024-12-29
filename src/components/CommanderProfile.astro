@@ -1,0 +1,97 @@
+---
+import { t } from '../i18n/translations'
+
+interface Props {
+  locale: 'en' | 'es'
+}
+
+const { locale } = Astro.props
+---
+
+<div class="panel col-span-2 fade-in">
+	<div class="panel-header">
+		<div class="flex items-center justify-between">
+			<div class="flex items-center gap-2">
+				<span class="text-[var(--accent)] header-text">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-terminal"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>
+				</span>
+				<span class="header-text">{t('mission.status', locale)}</span>
+			</div>
+			<div class="flex items-center gap-1 ml-1">
+				<span class="!text-green-500 text-xs header-text">{t('status.active', locale)}</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="p-6 grid md:grid-cols-2 gap-6">
+		<div class="space-y-6">
+			<div class="slide-in">
+				<h1 class="text-3xl font-bold mb-2 text-white">{t('commander.name', locale)}</h1>
+				<div class="flex items-center gap-2 text-sm mono-text">
+					<span class="text-[var(--accent)] header-text">
+						<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+					</span>
+					<span>{t('commander.location', locale)}</span>
+				</div>
+			</div>
+
+			<div class="space-y-4 slide-in" style="animation-delay: 0.2s;">
+				<div class="data-display">
+					<h2 class="header-text mb-2">{t('mission.objectives', locale)}:</h2>
+					<div class="space-y-2 text-sm">
+						<p>{t('mission.objective1', locale)}</p>
+						<p>{t('mission.objective2', locale)}</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="grid grid-cols-2 gap-4 slide-in" style="animation-delay: 0.3s;">
+				<div class="data-display bg-green-500/10 border-green-500/30">
+					<div class="header-text !text-green-500 mb-2 flex items-center gap-2">
+						<div class="status-indicator active !bg-green-500"></div>
+						{t('live.mission', locale)}
+					</div>
+					<div class="text-sm">{t('current.role', locale)}</div>
+				</div>
+				<div class="data-display">
+					<div class="header-text mb-2">{t('experience', locale)}</div>
+					<div class="text-sm">{t('years.active', locale)}</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="data-display slide-in" style="animation-delay: 0.4s;">
+		<h2 class="header-text mb-4">{t('commander.attributes', locale)}</h2>
+			<div class="space-y-4">
+				<div>
+					<h3 class="text-[var(--accent)] header-text text-xs mb-2 font-medium">{t('core.skills', locale)}</h3>
+					<div class="grid grid-cols-2 gap-2">
+						<div class="data-display text-center text-xs mono-text">{t('skill.problem.solver', locale)}</div>
+						<div class="data-display text-center text-xs mono-text">{t('skill.quick.learner', locale)}</div>
+						<div class="data-display text-center text-xs mono-text">{t('skill.team.leader', locale)}</div>
+						<div class="data-display text-center text-xs mono-text">{t('skill.innovator', locale)}</div>
+					</div>
+				</div>
+
+				<div>
+					<h3 class="text-[var(--accent)] header-text text-xs mb-2 font-medium">{t('mission.focus', locale)}</h3>
+					<div class="space-y-2 text-sm">
+						<div class="flex items-center gap-2">
+							<div class="w-1 h-1 rounded-full bg-[var(--accent)]"></div>
+							<span>{t('focus.frontend', locale)}</span>
+						</div>
+						<div class="flex items-center gap-2">
+							<div class="w-1 h-1 rounded-full bg-[var(--accent)]"></div>
+							<span>{t('focus.performance', locale)}</span>
+						</div>
+						<div class="flex items-center gap-2">
+							<div class="w-1 h-1 rounded-full bg-[var(--accent)]"></div>
+							<span>{t('focus.leadership', locale)}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

@@ -1,31 +1,32 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { CommanderProfile } from '../components/commander-profile';
-import { TechnicalSpecs } from '../components/technical-specs';
-import { MissionLog } from '../components/mission-log';
-import { CommunicationChannels } from '../components/communication-channels';
-import { ProjectsShowcase } from '../components/projects-showcase';
-import { LanguageSelector } from '../components/language-selector';
-import { DataVisualizer } from '../components/data-visualizer';
+import CommanderProfile from '../components/CommanderProfile.astro';
+import TechnicalSpecs from '../components/TechnicalSpecs.astro';
+import MissionLog from '../components/MissionLog.astro';
+import CommunicationChannels from '../components/CommunicationChannels.astro';
+import ProjectsShowcase from '../components/ProjectsShowcase.astro';
+import LanguageSelector from '../components/LanguageSelector.astro';
+import DataVisualizer from '../components/DataVisualizer.astro';
+import { myFade } from '../components/Transitions.astro';
 
 const locale = 'en';
 ---
 
 <Layout title="Ivan González - Mission Control" description="Full Stack Developer specializing in React, Vue, and Node.js. Explore my projects and get in touch!">
-  <main class="min-h-screen w-full bg-[#000813]">
+  <main class="min-h-screen w-full bg-[#000813]" transition:animate={myFade}>
     <div class="mission-container">
       <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 col-span-full">
-        <CommanderProfile client:load locale={locale} />
-        <CommunicationChannels client:load locale={locale} />
+        <CommanderProfile locale={locale} />
+        <CommunicationChannels locale={locale} />
       </div>
-      <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 col-span-full">
-        <TechnicalSpecs client:load locale={locale} />
-        <DataVisualizer client:load locale={locale} />
+      <div class="grid grid-cols-1 2xl:grid-cols-2 gap-4 col-span-full">
+        <TechnicalSpecs locale={locale} />
+        <DataVisualizer locale={locale} />
       </div>
-      <ProjectsShowcase client:load locale={locale} />
-      <MissionLog client:load locale={locale} />
+      <ProjectsShowcase locale={locale} />
+      <MissionLog locale={locale} />
     </div>
-    <LanguageSelector client:load />
+    <LanguageSelector />
   </main>
 </Layout>
 

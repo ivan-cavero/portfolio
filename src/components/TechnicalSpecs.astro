@@ -1,0 +1,106 @@
+---
+import { t, type TranslationKey } from '../i18n/translations';
+
+interface Props {
+  locale: 'en' | 'es';
+}
+
+const { locale } = Astro.props;
+
+const technologies = {
+  frontend: [
+    { name: 'JavaScript/TypeScript', level: 'Advanced' },
+    { name: 'React & Vue', level: 'Advanced' },
+    { name: 'CSS/Tailwind', level: 'Advanced' }
+  ],
+  backend: [
+    { name: 'Node.js', level: 'Advanced' },
+    { name: 'API Design', level: 'Intermediate' }
+  ],
+  infrastructure: [
+    { name: 'Docker', level: 'Intermediate' },
+    { name: 'Azure', level: 'Familiar' }
+  ]
+};
+
+const experienceLevels = [
+  { level: 'Advanced', description: '2000+ hours', color: 'text-green-400', bgColor: 'bg-green-400/20' },
+  { level: 'Intermediate', description: '500-2000 hours', color: 'text-yellow-400', bgColor: 'bg-yellow-400/20' },
+  { level: 'Beginner', description: '100-500 hours', color: 'text-blue-400', bgColor: 'bg-blue-400/20' },
+  { level: 'Familiar', description: '<100 hours', color: 'text-purple-400', bgColor: 'bg-purple-400/20' }
+];
+---
+
+<div class="panel h-full flex flex-col">
+  <div class="panel-header">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <!-- Cpu icon -->
+        <span class="text-[var(--accent)]">
+          <svg  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cpu"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>
+        </span>
+        <span class="header-text">{t('tech.specs', locale)}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-6 flex flex-col gap-8 flex-grow">
+    <div class="data-display bg-black/40 p-4">
+      <div class="flex flex-wrap gap-4 justify-around">
+        {experienceLevels.map((level) => (
+          <div class="flex items-center gap-2">
+            <div class={`w-2 h-2 rounded-full ${level.bgColor}`}></div>
+            <div class="flex items-center gap-1">
+              <span class={`text-xs font-bold ${level.color}`}>{t(`level.${level.level.toLowerCase()}` as TranslationKey, locale)}</span>
+              <span class="text-xs text-gray-400">({t(level.description as TranslationKey, locale)})</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 flex-grow">
+      {Object.entries(technologies).map(([key, techs]) => (
+        <div class="space-y-4">
+          <div class="flex items-center gap-2">
+            <span class="text-[var(--accent)]">
+              {key === 'frontend' ? (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-template"><rect width="18" height="7" x="3" y="3" rx="1"/><rect width="9" height="7" x="3" y="14" rx="1"/><rect width="5" height="7" x="16" y="14" rx="1"/></svg>
+              ) : key === 'backend' ? (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-server"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>
+              ) : (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+              )}
+            </span>
+            <h3 class="header-text">{t(key as TranslationKey, locale)}</h3>
+          </div>
+          <table class="w-full">
+            <thead>
+              <tr>
+                <th class="text-left text-xs text-[var(--accent)] pb-4">{t('system', locale)}</th>
+                <th class="text-right text-xs text-[var(--accent)] pb-4 min-w-[100px]">{t('status', locale)}</th>
+              </tr>
+            </thead>
+            <tbody class="space-y-4">
+              {techs.map((tech) => (
+                <tr class="border-b border-[var(--border)]">
+                  <td class="py-4 pr-4">{tech.name}</td>
+                  <td class="py-4 text-right whitespace-nowrap">
+                    <span class={`px-3 py-1.5 rounded text-xs ${
+                      tech.level === 'Advanced' ? 'bg-green-400/20 text-green-400' :
+                      tech.level === 'Intermediate' ? 'bg-yellow-400/20 text-yellow-400' :
+                      tech.level === 'Beginner' ? 'bg-blue-400/20 text-blue-400' :
+                      'bg-purple-400/20 text-purple-400'
+                    }`}>
+                      {t(`level.${tech.level.toLowerCase()}` as TranslationKey, locale)}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>

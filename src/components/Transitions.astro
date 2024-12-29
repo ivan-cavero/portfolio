@@ -1,0 +1,20 @@
+---
+import { fade } from 'astro:transitions';
+
+export const myFade = fade({ duration: '0.3s' });
+---
+
+<style is:global>
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.3s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none !important;
+    }
+  }
+</style>
+

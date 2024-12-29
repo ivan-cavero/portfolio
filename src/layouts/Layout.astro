@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import '../styles/globals.css';
 
 interface Props {
@@ -19,8 +19,11 @@ const { title, description = "Full Stack Developer Mission Control Interface" } 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <ViewTransitions />
+    <ClientRouter />
 
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="/fonts/ShareTechMono-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    
     <!-- Additional SEO meta tags -->
     <meta name="author" content="Ivan González" />
     <meta name="keywords" content="Full Stack Developer, React, Vue, Node.js, JavaScript, TypeScript" />
@@ -28,7 +31,7 @@ const { title, description = "Full Stack Developer Mission Control Interface" } 
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
-    <meta property="og:image" content="/og-image.jpg" /> <!-- Make sure to add an og-image.jpg in your public folder -->
+    <meta property="og:image" content="/og-image.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body class="antialiased">

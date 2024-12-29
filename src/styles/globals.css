@@ -1,19 +1,23 @@
+@font-face {
+  font-family: 'Share Tech Mono';
+  src: url('/fonts/ShareTechMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: #000813;
   --panel: #001324;
-  /* --accent: #00F6FF; */
+  
   --accent: #3da5f3;
-  --grid: rgba(0, 246, 255, 0.05);
-  --border: rgba(0, 246, 255, 0.15);
-  --glow: rgba(0, 246, 255, 0.2);
-}
-
-@font-face {
-  font-family: 'DistantGalaxy';
-  src: url('/fonts/DistantGalaxy.ttf') format('ttf');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+  --grid: rgba(61, 165, 243, 0.05);
+  --border: rgba(61, 165, 243, 0.15);
+  --glow: rgba(61, 165, 243, 0.2);
+  
+  /* Font variables */
+  --font-headers: 'Share Tech Mono', 'Courier New', Courier, monospace;
+  --font-body: 'Roboto Mono', 'Consolas', 'Courier New', Courier, monospace;
 }
 
 * {
@@ -23,11 +27,30 @@
 }
 
 body {
+  font-family: var(--font-body);
   background-color: var(--background);
   color: #E2E8F0;
-  font-family: 'DistantGalaxy', sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+/* Headers and important text */
+.header-text {
+  font-family: var(--font-headers);
+  color: var(--accent);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headers);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .mission-container {
@@ -91,14 +114,6 @@ body {
   justify-content: space-between;
 }
 
-.header-text {
-  font-family: 'Share Tech Mono', monospace;
-  color: var(--accent);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
 .data-display {
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid var(--border);
@@ -142,7 +157,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 246, 255, 0.8);
+  background: rgba(0, 132, 255, 0.8);
 }
 
 /* Firefox */
@@ -168,5 +183,9 @@ body {
   to {
     background-position: 0 100%;
   }
+}
+
+.mono-text {
+  font-size: 0.875rem;
 }
 

@@ -1,0 +1,67 @@
+---
+import { t } from '../i18n/translations';
+---
+
+<div 
+  class="fixed bottom-4 right-4 bg-[#001324] border border-[var(--accent)] rounded-lg overflow-hidden fade-in p-2"
+>
+  <div class="flex items-center space-x-2 language-selector">
+    <span class="text-[var(--accent)]">
+      <svg  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+    </span>
+    <a 
+      href="/"
+      class="language-link px-2 py-1 text-sm text-[var(--accent)] hover:bg-[var(--accent)]/10 transition-colors rounded"
+      data-lang="en"
+    >
+      {t('language.en', 'en')}
+    </a>
+    <a 
+      href="/es"
+      class="language-link px-2 py-1 text-sm text-[var(--accent)] hover:bg-[var(--accent)]/10 transition-colors rounded"
+      data-lang="es"
+    >
+      {t('language.es', 'es')}
+    </a>
+  </div>
+</div>
+
+<script>
+  import { navigate } from 'astro:transitions/client';
+
+  function updateLanguageSelector() {
+    const currentPath = window.location.pathname;
+    const languageLinks = document.querySelectorAll('.language-link');
+    
+    languageLinks.forEach(link => {
+      const linkPath = link.getAttribute('href');
+      if ((currentPath === '/' && linkPath === '/') || (currentPath.startsWith('/es') && linkPath === '/es')) {
+        link.classList.add('bg-[var(--accent)]', 'text-[#000813]');
+        link.classList.remove('text-[var(--accent)]', 'hover:bg-[var(--accent)]/10');
+      } else {
+        link.classList.remove('bg-[var(--accent)]', 'text-[#000813]');
+        link.classList.add('text-[var(--accent)]', 'hover:bg-[var(--accent)]/10');
+      }
+    });
+  }
+
+  // Initial update
+  updateLanguageSelector();
+
+  // Update on navigation
+  document.addEventListener('astro:after-navigation', updateLanguageSelector);
+
+  // Add click event listeners to language links
+  document.querySelectorAll('.language-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const newPath: string = link.getAttribute('href') as string;
+      navigate(newPath);
+    });
+  });
+
+  // Listen for the astro:page-load event to update the language selector
+  document.addEventListener('astro:page-load', () => {
+    updateLanguageSelector();
+  });
+</script>
