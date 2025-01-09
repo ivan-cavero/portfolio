@@ -8,23 +8,29 @@ import ProjectsShowcase from '../components/ProjectsShowcase.astro';
 import LanguageSelector from '../components/LanguageSelector.astro';
 import DataVisualizer from '../components/DataVisualizer.astro';
 import { myFade } from '../components/Transitions.astro';
+import StatsPanel from '../components/StatsPanel.astro';
 
 const locale = 'en';
 ---
 
-<Layout title="Ivan González - Mission Control" description="Full Stack Developer specializing in React, Vue, and Node.js. Explore my projects and get in touch!">
+<Layout title="Ivan Cavero - Mission Control" description="Full Stack Developer specializing in React, Vue, and Node.js. Explore my projects and get in touch!">
   <main class="min-h-screen w-full bg-[#000813]" transition:animate={myFade}>
     <div class="mission-container">
       <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 col-span-full">
         <CommanderProfile locale={locale} />
         <CommunicationChannels locale={locale} />
       </div>
-      <div class="grid grid-cols-1 2xl:grid-cols-2 gap-4 col-span-full">
-        <TechnicalSpecs locale={locale} />
-        <DataVisualizer locale={locale} />
+      <div class="grid grid-cols-1 2xl:grid-cols-3 gap-4 col-span-full">
+        <div class="2xl:col-span-2">
+          <TechnicalSpecs locale={locale} />
+        </div>
+        <div class="2xl:col-span-1">
+          <DataVisualizer locale={locale} />
+        </div>
       </div>
       <ProjectsShowcase locale={locale} />
       <MissionLog locale={locale} />
+      <StatsPanel locale={locale} />
     </div>
     <LanguageSelector />
   </main>
