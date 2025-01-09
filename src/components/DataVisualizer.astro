@@ -8,20 +8,18 @@ interface Props {
 const { locale } = Astro.props;
 ---
 
-<div class="panel h-full flex flex-col">
+<div class="panel h-full flex flex-col col-span-2">
   <div class="panel-header">
     <div class="flex items-center justify-between w-full">
       <div class="flex items-center gap-2">
-        <!-- Monitor icon -->
         <span class="text-[var(--accent)]">
-          <svg  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-monitor"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-monitor"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
         </span>
         <span class="header-text">{t('system.analytics', locale)}</span>
       </div>
       <div class="flex items-center gap-2">
-        <!-- Activity icon -->
         <span class="text-[var(--accent)] animate-pulse !text-green-500">
-          <svg  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>
         </span>
         <span class="!text-green-500 text-xs text-[var(--accent)]">{t('live.feed', locale)}</span>
       </div>
@@ -30,26 +28,30 @@ const { locale } = Astro.props;
 
   <div class="p-6 flex-grow">
     <div class="relative h-full w-full bg-black/50 rounded-lg overflow-hidden border border-[var(--border)]">
-      <div id="loading" class="absolute inset-0 flex items-center justify-center bg-black/70 z-10">
+      <div id="loading" class="absolute inset-0 flex items-center justify-center bg-black/70 z-[5]">
         <div class="text-[var(--accent)] animate-spin">
-          <!-- Activity icon -->
           <span>
-            <svg  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>
           </span>
         </div>
       </div>
 
-      <div id="error" class="absolute inset-0 items-center justify-center bg-black/70 z-10 hidden">
-        <!-- AlertTriangle icon -->
+      <div id="error" class="absolute inset-0 items-center justify-center bg-black/70 z-[5] hidden">
         <span class="text-red-500 mb-4">
-          <svg  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
         </span>
         <p class="text-red-500 text-center">{t('video.error', locale)}</p>
       </div>
 
+      <div 
+        id="posterImage" 
+        class="absolute inset-0 bg-cover bg-center z-[1]" 
+        style="background-image: url('/interface-visualization-poster.png');"
+      ></div>
+
       <video
         id="dataVideo"
-        class="w-full h-full object-cover"
+        class="w-full h-full object-cover relative z-[2]"
         autoplay
         loop
         muted
@@ -59,53 +61,79 @@ const { locale } = Astro.props;
         {t('video.not.supported', locale)}
       </video>
 
-      <div class="absolute inset-0 bg-[var(--accent)]/5"></div>
-      <div class="absolute inset-0 bg-scan-lines pointer-events-none"></div>
+      <div class="absolute inset-0 bg-[var(--accent)]/5 z-[3]"></div>
+      <div class="absolute inset-0 bg-scan-lines pointer-events-none z-[4]"></div>
 
-      <div class="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-[var(--accent)]"></div>
-      <div class="absolute top-2 right-2 w-4 h-4 border-r-2 border-t-2 border-[var(--accent)]"></div>
-      <div class="absolute bottom-2 left-2 w-4 h-4 border-l-2 border-b-2 border-[var(--accent)]"></div>
-      <div class="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-[var(--accent)]"></div>
+      <div class="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-[var(--accent)] z-[6]"></div>
+      <div class="absolute top-2 right-2 w-4 h-4 border-r-2 border-t-2 border-[var(--accent)] z-[6]"></div>
+      <div class="absolute bottom-2 left-2 w-4 h-4 border-l-2 border-b-2 border-[var(--accent)] z-[6]"></div>
+      <div class="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-[var(--accent)] z-[6]"></div>
     </div>
   </div>
 </div>
 
 <script>
-  const video = document.getElementById('dataVideo') as HTMLVideoElement;
-  const loading = document.getElementById('loading');
-  const error = document.getElementById('error');
+  function setupVideo() {
+    const video = document.getElementById('dataVideo') as HTMLVideoElement;
+    const loading = document.getElementById('loading');
+    const error = document.getElementById('error');
+    const posterImage = document.getElementById('posterImage');
 
-  let hasStartedPlaying = false;
+    let hasStartedPlaying = false;
 
-  if (video) {
-    video.addEventListener('canplay', () => {
-      console.log('Video can play');
-      if (loading) loading.style.display = 'none';
-      video.play().catch(error => {
-        console.error("Error attempting to play video:", error);
-        if (error) error.style.display = 'flex';
+    if (video) {
+      video.addEventListener('canplay', () => {
+        if (loading) loading.style.display = 'none';
+        if (posterImage) posterImage.style.display = 'none';
+        video.play().catch(error => {
+          console.error("Error attempting to play video:", error);
+          if (error) error.style.display = 'flex';
+        });
       });
-    });
 
-    video.addEventListener('waiting', () => {
-      console.log('Video is waiting for more data');
-      if (!hasStartedPlaying && loading) {
-        loading.style.display = 'flex';
-      }
-    });
+      video.addEventListener('waiting', () => {
+        if (!hasStartedPlaying) {
+          if (loading) loading.style.display = 'flex';
+          if (posterImage) posterImage.style.display = 'block';
+        }
+      });
 
-    video.addEventListener('playing', () => {
-      console.log('Video is playing');
-      if (loading) loading.style.display = 'none';
-      hasStartedPlaying = true;
-    });
+      video.addEventListener('playing', () => {
+        if (loading) loading.style.display = 'none';
+        if (posterImage) posterImage.style.display = 'none';
+        hasStartedPlaying = true;
+      });
 
-    video.addEventListener('error', (e) => {
-      console.error("Error loading video:", video.error);
-      if (error) error.style.display = 'flex';
-      if (loading) loading.style.display = 'none';
-    });
+      video.addEventListener('error', (e) => {
+        console.error("Error loading video:", video.error);
+        if (error) error.style.display = 'flex';
+        if (loading) loading.style.display = 'none';
+        if (posterImage) posterImage.style.display = 'block';
+      });
 
-    video.load();
+      video.load();
+    }
   }
+
+  // Initial setup
+  setupVideo();
+
+  // Reset video when language changes
+  document.addEventListener('astro:page-load', () => {
+    const video = document.getElementById('dataVideo') as HTMLVideoElement;
+    const loading = document.getElementById('loading');
+    const error = document.getElementById('error');
+    const posterImage = document.getElementById('posterImage');
+
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+      if (loading) loading.style.display = 'flex';
+      if (error) error.style.display = 'none';
+      if (posterImage) posterImage.style.display = 'block';
+    }
+
+    setupVideo();
+  });
 </script>
+
